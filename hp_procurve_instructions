@@ -1,0 +1,38 @@
+Open a PuTTy SSH session to the USM management IP.
+Note: To paste from the clipboard into PuTTy, right click anywhere in the PuTTy screen.
+
+Copy and paste the following two commands into bash to recreate the sql file:
+echo "" >/root/hp_procurve_switch.sql
+vi /root/hp_procurve_switch.sql
+
+Hit the "i" key to enter insert mode.
+
+Copy and paste the contents of the following website into the vi interface: 
+https://raw.githubusercontent.com/erjbutler/AlienVault/master/hp_procurve_switch.sql
+
+Hit the "esc" key to exit insert mode.
+
+Enter ":wq!" and hit enter to save the file and exit vi.
+
+Copy the following command into bash to write the values to database:
+cat /root/hp_procurve_switch.sql |ossim-db
+
+Copy and paste the following commands into bash to recreate the plugin config file:
+echo "" >/etc/ossim/agent/plugins/hp_procurve_switch.cfg
+vi /etc/ossim/agent/plugins/hp_procurve_switch.cfg
+
+Hit the "i" key to enter insert mode.
+
+Copy and paste the contents of the following website into the vi interface: 
+https://raw.githubusercontent.com/erjbutler/AlienVault/master/hp_procurve_switch.cfg
+
+Hit the "esc" key to exit insert mode.
+
+Enter ":wq!" and hit enter to save the file and exit vi.
+
+Copy and paste the following command into bash to allow USM to pick up the changes:
+alienvault-reconfig
+
+You should now see appropriate events in the USM Web UI.  Navigate to Analysis -> Security Events.  Under the Data Sources dropdown box, select Procurve. 
+Note: You may also see Generic events as well for events not relevant to USM correlation.
+Note: It may take some time for the ProCurve to forward the appropriate events to USM.
