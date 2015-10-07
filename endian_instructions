@@ -1,0 +1,37 @@
+Open a PuTTy SSH session to the USM management IP.
+Note: To paste from the clipboard into PuTTy, right click anywhere in the PuTTy screen.
+
+Copy and paste the following two commands into bash to recreate the sql file:
+echo "" >/root/endian.sql
+vi /root/endian.sql
+
+Hit the "i" key to enter insert mode.
+
+Copy and paste the contents of the following website into the vi interface: https://raw.githubusercontent.com/erjbutler/AlienVault/master/endian.sql
+
+Hit the "esc" key to exit insert mode.
+
+Enter ":wq!" and hit enter to save the file and exit vi.
+
+Copy the following command into bash to write the values to database:
+echo /root/endian.sql |ossim-db
+
+Copy and paste the following commands into bash to recreate the plugin config file:
+echo "" >/etc/ossim/agent/plugins/endian.cfg
+vi /etc/ossim/agent/plugins/endian.cfg
+
+Hit the "i" key to enter insert mode.
+
+Copy and paste the contents of the following website into the vi interface: 
+https://raw.githubusercontent.com/erjbutler/AlienVault/master/endian.cfg
+
+Hit the "esc" key to exit insert mode.
+
+Enter ":wq!" and hit enter to save the file and exit vi.
+
+Copy and paste the following command into bash to allow USM to pick up the changes:
+alienvault-reconfig
+
+You should now see block and allow events in the USM Web UI.  Navigate to Analysis -> Security Events.  Under the Data Sources dropdown box, select Endian.  See attached screenshot for example output of the events you should see.
+Note: You may also see Generic events as well for non-traffic related syslog messages.
+Note: It may take some time for the firewall to forward the appropriate events to USM.
