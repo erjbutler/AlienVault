@@ -14,7 +14,7 @@ Hit the "esc" key to exit insert mode.
 Enter ":wq!" and hit enter to save the file and exit vi.
 
 Copy the following command into bash to write the values to database:
-echo /root/endian.sql |ossim-db
+cat /root/endian.sql |ossim-db
 
 Copy and paste the following commands into bash to recreate the plugin config file:
 echo "" >/etc/ossim/agent/plugins/endian.cfg
